@@ -1,107 +1,88 @@
-    
-design_2 = "***" 
-width = 150
-space = " " 
+SIDE_BORDER_TEXTURE = "***"
+TOP_BORDER_TEXTURE = "*"
+WIDTH = 150
 
-
-def calculator_instructions():
+def print_calculator_instructions():
     text_to_print = "welcome to my calculator!"
-    border_design_2(text_to_print)
+    centerised_custom_printer(text_to_print)
     text_to_print = "This calculator can perform: addition, subtraction, multiplication, division"
-    border_design_2(text_to_print)
-
-def addition():
+    centerised_custom_printer(text_to_print)
+    
+def addition(number_1:int, number_2:int):
     result = number_1 + number_2
-    text_to_print = "The answer is " + str(result)
-    border_design_2(text_to_print)
+    return result
 
-def subtraction():
+def subtraction(number_1:int, number_2:int):
     result = number_1 - number_2
-    text_to_print = "The answer is " + str(result)
-    border_design_2(text_to_print)
+    return result
 
-def multiplication():
+def multiplication(number_1:int, number_2:int):
     result = number_1 * number_2
-    text_to_print = "The answer is " + str(result)
-    border_design_2(text_to_print)
+    return result
 
-def division():
+def division(number_1:int, number_2:int):
     result = number_1 / number_2
-    text_to_print = "The answer is " + str(result)
-    border_design_2(text_to_print)
-    
-def border_design_1():
+    return result
+
+def centerised_custom_printer(text_to_print) :
+    text = text_to_print if len(text_to_print) %2 == 0 else text_to_print + " " 
     width = 150
-    design_1 = "*" 
-    line_1 = design_1 * width
-    print(line_1)
-
-def border_design_2(text_to_print) :
-    width_space = (width - len(text_to_print))/2 - len(design_2) 
-    spacing = space * int(width_space)
-    line_2 = design_2 + spacing + text_to_print + spacing + design_2
+    space = " " 
+    width_space = (width - len(text))/2 - len(SIDE_BORDER_TEXTURE) 
+    padding = space * int(width_space)
+    line_2 = SIDE_BORDER_TEXTURE + padding + text + padding + SIDE_BORDER_TEXTURE
     print(line_2)
+    return padding
 
-def border_design_3(text_to_print):
-    width_space = (width - len(text_to_print))/2 - len(design_2) 
-    spacing = space * int(width_space)
-    line_3 = design_2 + spacing 
-    
-    
-   
 print("\n")
+for i in range(2):
+    print(TOP_BORDER_TEXTURE * WIDTH)
+centerised_custom_printer(" ")
+print_calculator_instructions()
+centerised_custom_printer(" ")
+print(TOP_BORDER_TEXTURE * WIDTH)
 
-border_design_1()
-border_design_1()
-border_design_2(" ")
-calculator_instructions()
-border_design_2(" ")
-border_design_1()
+request_padding = centerised_custom_printer("do you want to make an operation?")
+response_prompt = "response: "
+make_operartion = input(SIDE_BORDER_TEXTURE + request_padding + response_prompt)
 
-  
-text_to_print = "do you want to make an operation?"
-border_design_2(text_to_print)
-
-make_operartion = input(" ")
-border_design_3(make_operartion)
 while make_operartion == "yes":  
-    text_to_print = "enter number 1 "
-    border_design_2(text_to_print)
-    number_1 = input(" ")
-    border_design_3(number_1)
-    text_to_print = "enter number 2"
-    border_design_2(text_to_print)
-    number_2 = input(" ")
-    border_design_3(number_2)
+    request_padding = centerised_custom_printer("enter number 1")
+    number_1 = int(input(SIDE_BORDER_TEXTURE + request_padding + response_prompt))
+    centerised_custom_printer("enter number 2")
+    number_2 = int(input(SIDE_BORDER_TEXTURE + request_padding + response_prompt))
 
     list_of_operations_types = ["+", "-", "*", "/" ]
     for i, operation in enumerate(list_of_operations_types):
         i += 1
-        text_to_print = str(i) + ". " + operation
-        border_design_2(text_to_print)
-    text_to_print = "enter the operation type (choose a number please) "
-    border_design_2(text_to_print)
-    chosen_operation = int(input())
-    border_design_3(chosen_operation)
+        centerised_custom_printer(str(i) + ". " + operation)
+    centerised_custom_printer("enter the operation type (choose a number please) ")
+    chosen_operation = int(input(SIDE_BORDER_TEXTURE + request_padding + response_prompt))
 
     if chosen_operation == 1:
-        addition()
+        result = addition(number_1, number_2)
+        centerised_custom_printer("The answer is " + str(result))
     elif chosen_operation == 2:
-        subtraction()
+        centerised_custom_printer("The answer is " + str(subtraction(number_1, number_2)))
     elif chosen_operation == 3:
-        multiplication()
+        centerised_custom_printer("The answer is " + str(multiplication(number_1, number_2)))
     elif chosen_operation == 4:
         if number_2 != 0:
-            division()
+            centerised_custom_printer("The answer is " + str(division(number_1, number_2)))
         else:
-            print("division by zero is not possible!")
+            centerised_custom_printer("division by zero is not possible!")
     else:
-        print("This operation does not exist")
-    make_operartion = input("do you want to make an operation? ")
+        centerised_custom_printer("This operation does not exist")
+    request_padding = centerised_custom_printer("do you want to make an operation? ")
+    make_operartion = input(SIDE_BORDER_TEXTURE + request_padding + response_prompt)
     while make_operartion != "no" and make_operartion != "yes":
-        print("invalid response")
-        make_operartion = input("do you want to make an operation? ")
-    
-else: 
-    print("see you next time")
+        centerised_custom_printer("invalid response")
+        request_padding = centerised_custom_printer("do you want to make an operation? ")
+        make_operartion = input(SIDE_BORDER_TEXTURE + request_padding + response_prompt)
+
+print(TOP_BORDER_TEXTURE * WIDTH)   
+else:
+    centerised_custom_printer("see you next time")
+for i in range(2):
+    print(TOP_BORDER_TEXTURE * WIDTH)
     
