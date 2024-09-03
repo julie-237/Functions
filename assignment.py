@@ -8,7 +8,7 @@ def sum_of_single_natural_numbers(n: int):
     #print(sum)
     sum = 0
     for n in range(0, 10):
-        sum += 0
+        sum += 1
         print(sum)
         
     
@@ -17,6 +17,7 @@ def sum_of_number_list(number_list: list[int]):
     for n in number_list:
        sum += n
     return sum
+
 def print_sum_of_number_list(number_list: list[int]):
     sum = sum_of_number_list(number_list)
     if len(number_list) >= 2:
@@ -53,7 +54,7 @@ print_sum_of_number_list([1, 5, 6, 7, 8, 9])
 print_sum_of_number_list([1, 5])       
 print_sum_of_number_list([5])       
 print_sum_of_number_list([])       
-#sum_of_single_natural_numbers(6)
+sum_of_single_natural_numbers(6)
 #division_of_two_numbers(10, 5)
 
 #words =  ["this", "is", "a", "sentence"]
