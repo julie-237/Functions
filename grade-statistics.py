@@ -1,3 +1,18 @@
+
+SIDE_BORDER_TEXTURE = "***"
+TOP_BORDER_TEXTURE = "*"
+WIDTH = 150
+SPACE = " " 
+RESPONSE_PROMPT = "response: "
+
+def centerised_custom_printer(text_to_print) :
+    text = text_to_print if len(text_to_print) %2 == 0 else text_to_print + " " 
+    width_space = (WIDTH - len(text))/2 - len(SIDE_BORDER_TEXTURE) 
+    padding = SPACE * int(width_space)
+    line_2 = SIDE_BORDER_TEXTURE + padding + text + padding + SIDE_BORDER_TEXTURE
+    print(line_2)
+    return padding
+
 def get_grade_list_from_user():
     usergrade = get_grade_from_user()
     while usergrade != -1:
@@ -5,12 +20,13 @@ def get_grade_list_from_user():
             grade_list.append(usergrade)
             usergrade = get_grade_from_user()
         else:
-            print("invalid grade")
+            centerised_custom_printer("invalid grade")
             usergrade = get_grade_from_user()
     return grade_list
 
 def get_grade_from_user():
-    return int(input("give a grade "))
+    grade = centerised_custom_printer("give a grade ")
+    return int(input(SIDE_BORDER_TEXTURE + grade + RESPONSE_PROMPT))
     
 
 def compute_grade_list_minimum(grade_list: list[int]):
@@ -40,14 +56,22 @@ def sum_of_grade_list(grade_list: list[int]):
     
 
 grade_list = []
-
-print("Welcome to grade statistics")
+print("\n")
+for i in range(2):
+    print(TOP_BORDER_TEXTURE * WIDTH)
+    centerised_custom_printer(" ")
+centerised_custom_printer("Welcome to grade statistics")
+centerised_custom_printer(" ")
+print(TOP_BORDER_TEXTURE * WIDTH)
 grade_list = get_grade_list_from_user()
 if len(grade_list) > 0:
-    print("you have " + str(len(grade_list)) + " grades, which are " + str(grade_list))
+    centerised_custom_printer("you have " + str(len(grade_list)) + " grades, which are " + str(grade_list))
     least_grade = compute_grade_list_minimum(grade_list)
     highest_grade = compute_grade_list_maximum(grade_list)
     average_grade = compute_grade_list_average(grade_list)
-    print("min grade is " + str(least_grade) + ", " + "max grade is " + str(highest_grade) + ", " + "the average is " + str(average_grade))
+    print(TOP_BORDER_TEXTURE * WIDTH)
+    centerised_custom_printer("min grade is " + str(least_grade) + ", " + "max grade is " + str(highest_grade) + ", " + "the average is " + str(average_grade))
+    for i in range(2):
+        print(TOP_BORDER_TEXTURE * WIDTH)
 else:
     exit   
